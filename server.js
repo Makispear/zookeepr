@@ -1,5 +1,5 @@
 // JSON ==================================================
-// const { animals } = require('./data/animals');
+const { animals } = require('./data/animals');
 // REQUIREMENTS ==================================================
 const fs = require('fs');
 const path = require('path');
@@ -15,9 +15,11 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+// comes first 
+app.use(express.static('public'));
+// then these 
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
-app.use(express.static('public'));
 
 // LISTEN ==================================================
 app.listen(PORT, () => {
